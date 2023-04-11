@@ -125,4 +125,13 @@ userRouter.get("/analytics/users/top-liked", async (req, res) => {
   }
 });
 
+userRouter.get("/analytics/users/top-active", async (req, res) => {
+  try {
+    const users = await UserModel.find().sort("-posts").limit(5);
+    res.send(users);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = { userRouter };
